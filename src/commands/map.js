@@ -12,6 +12,10 @@ exports.builder = function (yargs) {
   yargs.describe('map-background', 'Select background map')
     .choices('map-background', _.keys(resources.maps()))
     .default('map-background', 'world');
+
+  yargs.describe('projection', 'Select map projection')
+    .choices('projection', ['mercator', 'conic-conformal', 'equirectangular'])
+    .default('projection', 'mercator');
 };
 
 exports.handler = function (options) {
@@ -44,7 +48,8 @@ function createProjection(context, moves, options) {
 
   const extent = { type: 'LineString', coordinates: [topLeft, bottomRight] };
 
-  return context.d3.geoMercator()
+  const projection = options.projection.split('-').map(_.capitalize).join('');
+  return context.d3[`geo${projection}`]()
     .fitExtent([[options.width * 0.05, options.height * 0.05], [options.width * 0.95, options.height * 0.95]], extent);
 }
 
