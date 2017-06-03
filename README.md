@@ -1,7 +1,7 @@
 
 # Moves App Visualizer
 
-Create visualizations from your [Moves App](https://accounts.moves-app.com/) location history.
+Create visualizations from your [Moves App](https://www.moves-app.com/) location history.
 
 ## Installation
 
@@ -12,7 +12,7 @@ npm install -g @claygregory/moves-viz
 
 ## Usage
 
-First, you'll need your [Moves App export](https://accounts.moves-app.com/export), extracting the JSON archive for the `storyline.json` of interest. For example, use `exports/json.zip/full/storyline.json` for your complete location history.
+First, you'll need your [Moves App export](https://accounts.moves-app.com/export), extracting the JSON archive for the `storyline.json` of interest. For example, use `export/json.zip/full/storyline.json` for your complete location history.
 
 ### Examples
 
@@ -22,7 +22,7 @@ To plot a map of your moves, use the `map` command:
 moves-viz map storyline.json map.png
 ```
 
-A more complete example, customizing the output:
+A more complete `map` example, customizing the output:
 ```bash
 moves-viz map --projection conic-conformal --theme solarized --height 900 --width 1600 storyline.json map.png
 ```
