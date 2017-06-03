@@ -36,7 +36,6 @@ Use `--theme` to select from the below color palettes.
 | Name             | `--theme`      | Example | Description 
 |---               |---             |---      |---
 | **Accent**       | `accent`       | <img src="./screenshots/theme-accent.png" width="240" height="120"/> | Based on the [Color Brewer Accent](http://colorbrewer2.org/#type=qualitative&scheme=Accent) palette
-
 | **Default**      | `default`      | <img src="./screenshots/theme-default.png" width="240" height="120"/> | Based on the [D3 Category10](https://github.com/d3/d3-scale/blob/master/README.md#schemeCategory10) palette
 | **Pastel**       | `pastel`       | <img src="./screenshots/theme-pastel.png" width="240" height="120"/> | Based on the [Color Brewer Pastel1](http://colorbrewer2.org/#type=qualitative&scheme=Pastel1) palette
 | **Set1**         | `set1`         | <img src="./screenshots/theme-set1.png" width="240" height="120"/> | Based on the [Color Brewer Set1](http://colorbrewer2.org/#type=qualitative&scheme=Set1) palette
