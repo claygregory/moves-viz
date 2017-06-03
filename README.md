@@ -1,7 +1,7 @@
 
 # Moves App Visualizer
 
-Create visualizations from your [Moves App](https://accounts.moves-app.com/) location history as a PNG or SVG.
+Create visualizations from your [Moves App](https://accounts.moves-app.com/) location history.
 
 ## Installation
 
