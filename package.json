@@ -1,0 +1,25 @@
+{
+  "name": "@claygregory/moves-viz",
+  "version": "0.0.1",
+  "description": "Visualizes Moves App location history",
+  "author": "Clay Gregory <clay@claygregory.com> (https://claygregory.com/)",
+  "license": "MIT",
+  "bin": {
+    "moves-viz": "src/index.js"
+  },
+  "dependencies": {
+    "@claygregory/moves-cleaner": "^1.0.0",
+    "d3-node": "^1.0.2",
+    "fast-haversine": "^1.0.0",
+    "fs-extra": "^3.0.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "path": "^0.12.7",
+    "svg2png": "^4.1.1",
+    "topojson": "^3.0.0",
+    "yargs": "^8.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1"
+  }
+}

@@ -1,0 +1,6 @@
+{
+	"description": "Based on Ethan Schoonover's Solarized palette",
+	"background_colors": ["#EEE8D5", "#586E75", "#002B36"],
+	"forground_colors": ["#B58900", "#859900", "#DC322F", "#268BD2", "#D33682", "#6C71C4", "#CB4B16"],
+	"stroke_width": 2
+}

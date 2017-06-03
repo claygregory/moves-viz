@@ -1,0 +1,6 @@
+{
+	"description": "Based on the Color Brewer Accent palette",
+  "background_colors": ["#FFFFFF", "#666666", "#DEDEDE"],
+  "forground_colors": ["#7FC97F","#BEAED4","#FDC086","#FFFF99","#386CB0","#F0027F","#BF5B17"],
+  "stroke_width": 2
+}

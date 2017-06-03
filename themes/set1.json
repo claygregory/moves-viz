@@ -1,0 +1,6 @@
+{
+	"description": "Based on the Color Brewer 6-Class Set1 palette",
+  "background_colors": ["#FFFFFF", "#CCCCCC", "#DEDEDE"],
+  "forground_colors": ["#E41A1C","#377EB8","#4DAF4A","#984EA3","#FF7F00","#FFFF33"],
+  "stroke_width": 2
+}
