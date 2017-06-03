@@ -67,6 +67,8 @@ function drawMap(context, moves, options) {
 
   context.svg.append('path')
     .attr('class', 'map')
+    .attr('stroke-linejoin', 'round')
+    .attr('stroke-linecap', 'round')
     .attr('stroke', colors('stroke'))
     .attr('fill', colors('fill'))
     .datum(geoMap)
@@ -95,6 +97,8 @@ function drawMoves(context, moves, options) {
     path
       .attr('class', `move ${move.activity}`)
       .attr('fill', 'none')
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
       .attr('stroke', activityColors(move.activity))
       .attr('stroke-width', theme.stroke_width || 1)
       .attr('d', geopath);
