@@ -12,22 +12,44 @@ npm install -g @claygregory/moves-viz
 
 ## Usage
 
-First, you'll need your [Moves App export](https://accounts.moves-app.com/export), extracting the JSON archive for the `storyline.json` of interest. For example, use `export/json.zip/full/storyline.json` for your complete location history.
+First, you'll need your [Moves App export](https://accounts.moves-app.com/export), extracting the JSON archive for the `storyline.json` of interest. For example, use `[export]/json.zip/full/storyline.json` to visualize your complete location history.
 
-### Examples
+As a command-line app, basic usage takes the form:
+```bash
+moves-viz [command] path/to/storyline.json path/to/output-image.png
+```
 
-To plot a map of your moves, use the `map` command:
+### Map
 
+Plot an overview map of your travels using default settings using the `map` command:
 ```bash
 moves-viz map storyline.json map.png
 ```
 
-A more complete `map` example, customizing the output:
+Or customize the `map` output, selecting a color theme and map projection:
 ```bash
 moves-viz map --projection conic-conformal --theme solarized --height 900 --width 1600 storyline.json map.png
 ```
 
 <img src="./screenshots/example-map.png" width="100%"/>
+
+Additional options can be found via `moves-viz map --help`.
+
+### Small Multiple Cities
+
+Plot a city-based small multiples grid, inspired by [Nicholas Felton's GPX Map Mosaic](https://github.com/feltron/Processing_GPXMapMosaic), using the `cities` command:
+
+```bash
+moves-viz cities storyline.json cities.png
+```
+
+Or customize the `cities` output, selecting a theme and limiting display to the top 10 cities:
+```bash
+moves-viz cities --theme solarized --limit 10 --height 600 --width 1500 storyline.json cities.png
+```
+<img src="./screenshots/example-cities.png" width="100%"/>
+
+Additional options can be found via `moves-viz cities --help`.
 
 ### Color Themes
 
@@ -43,7 +65,7 @@ Use `--theme` to select from the below color palettes.
 
 ### Output Format
 
-By default, a PNG file is created. You can optionally export as an SVG using `--format svg`.
+A PNG file is created by default. If you'd like an SVG, use `--format svg`.
 
 ### Output Size
 
@@ -52,14 +74,14 @@ You can control the height/width of the output image with `--height <size-in-pix
 
 ### Additional Help
 
-To access basic usage information:
+To discover basic command and usage information:
 ```bash
 moves-viz --help
 ```
 
-Include the command to see command-specific options:
+Include the command to see all available options:
 ```bash
-moves-viz map --help
+moves-viz [command] --help
 ```
 
 ## License
