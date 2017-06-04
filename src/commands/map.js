@@ -6,7 +6,7 @@ const topojson = require('topojson');
 const _ = require('lodash');
 
 exports.command = 'map <input> <output>';
-exports.desc = 'Generates a map from movements';
+exports.desc = 'Generate an overview map of travels';
 exports.builder = function (yargs) {
   
   yargs.describe('map-background', 'Select background map')
