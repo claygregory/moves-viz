@@ -27,7 +27,7 @@ exports.builder = function (yargs) {
 
 exports.handler = function (options) {
 
-  const segments = utils.loadStoryline(options.input);
+  const segments = utils.loadStoryline(options.input, options);
 
   const controlPoints = clusterLocations(segments, options);
   const sortedControlPoints = _.chain(controlPoints)

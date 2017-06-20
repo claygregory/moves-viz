@@ -4,6 +4,7 @@ const D3Node = require('d3-node');
 const MovesCleaner = require('@claygregory/moves-cleaner');
 
 const fs = require('fs-extra');
+const moment = require('moment');
 const svg2png = require('svg2png');
 const _ = require('lodash');
 
@@ -21,12 +22,24 @@ utils.createD3n = function(options) {
   };
 };
 
-utils.loadStoryline = function(path) {
+utils.loadStoryline = function(path, options) {
   const storyline = fs.readJsonSync(path);
 
-  const segments = _.flatMap(storyline, d => d.segments);
+  let segments = _.flatMap(storyline, d => d.segments);
   const movesCleaner = new MovesCleaner();
-  return movesCleaner.apply(segments);
+  segments = movesCleaner.apply(segments);
+
+  if (!_.isEmpty(options['start-date'])) {
+    const start = moment(options['start-date']);
+    segments = _.filter(segments, s => start.isBefore(s.endTime));
+  }
+
+  if (!_.isEmpty(options['end-date'])) {
+    const end = moment(options['end-date']);
+    segments = _.filter(segments, s => end.isAfter(s.startTime));
+  }
+
+  return segments;
 };
 
 utils.writeOutput = function(d3nContext, output, options) {

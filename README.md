@@ -71,6 +71,9 @@ A PNG file is created by default. If you'd like an SVG, use `--format svg`.
 
 You can control the height/width of the output image with `--height <size-in-pixels>` and `--width <size-in-pixels>`.
 
+### Filter Date Range
+
+Filter your activity to a specific date/time range using `--start-date <date-optional-time>` and `--end-date <date-optional-time>`. The dates should be specified in ISO8601 format; time is optional.
 
 ### Additional Help
 

@@ -9,6 +9,9 @@ require('yargs')
   .commandDir('commands')
   .demandCommand()
 
+  .describe('start-date', 'Only plot activity after this date')
+  .describe('end-date', 'Only plot activity before this date')
+
   .describe('height', 'Output image height')
   .number('height')
   .default('height', 800)

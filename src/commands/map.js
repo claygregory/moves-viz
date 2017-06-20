@@ -20,7 +20,7 @@ exports.builder = function (yargs) {
 
 exports.handler = function (options) {
 
-  const segments = utils.loadStoryline(options.input);
+  const segments = utils.loadStoryline(options.input, options);
   const moves = _.filter(segments, ['type', 'move']);
 
   const context = utils.createD3n(options);
