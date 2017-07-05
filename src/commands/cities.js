@@ -15,6 +15,8 @@ exports.builder = function (yargs) {
     .number('limit')
     .default('limit', 12);
 
+  yargs.describe('activity', 'Filter movements to specified activity');
+
   yargs.describe('min-points', '(advanced) Minimum number of points for clustering')
     .number('min-points')
     .default('min-points', 4);
@@ -27,7 +29,9 @@ exports.builder = function (yargs) {
 
 exports.handler = function (options) {
 
-  const segments = utils.loadStoryline(options.input, options);
+  let segments = utils.loadStoryline(options.input, options);
+  if (options.activity)
+    segments = _.filter(segments, ['activity', options.activity]);
 
   const controlPoints = clusterLocations(segments, options);
   const sortedControlPoints = _.chain(controlPoints)
@@ -47,10 +51,12 @@ exports.handler = function (options) {
 
 function clusterLocations(segments, options) {
 
-  const places = _.filter(segments, ['type', 'place']);
-  const dataset = _.chain(places)
-    .map(p => p.place.location)
+  const moves = _.filter(segments, ['type', 'move']);
+  const dataset = _.chain(moves)
+    .flatMap(m => [_.first(m.trackPoints), _.last(m.trackPoints)])
     .filter()
+    .map(m => _.pick(m, ['lat', 'lon']))
+    .uniqBy(m => _.values(m).join(','))
     .value();
 
   const dbscan = new clustering.DBSCAN();
