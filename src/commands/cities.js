@@ -17,6 +17,8 @@ exports.builder = function (yargs) {
 
   yargs.describe('activity', 'Filter movements to specified activity');
 
+  yargs.describe('filter', 'Only render cities containing the given string');
+
   yargs.describe('min-points', '(advanced) Minimum number of points for clustering')
     .number('min-points')
     .default('min-points', 4);
@@ -34,14 +36,24 @@ exports.handler = function (options) {
     segments = _.filter(segments, ['activity', options.activity]);
 
   const controlPoints = clusterLocations(segments, options);
-  const sortedControlPoints = _.chain(controlPoints)
+  let clusters = _.chain(controlPoints)
     .sortBy(points => -points.length)
-    .take(options.limit)
+    .map(points => ({
+      label: lookupLabel(points),
+      controlPoints: points
+    }))
     .value();
+
+  if (options.filter)
+    clusters = _.filter(clusters, c => {
+      return (c.label || '').toLowerCase().indexOf(options.filter.toLowerCase()) > -1;
+    });
+
+  clusters = _.take(clusters, options.limit);
 
   const context = utils.createD3n(options);
 
-  _.each(sortedControlPoints, (cluster, index, clusters) => {
+  _.each(clusters, (cluster, index, clusters) => {
     const square = computeSquareDimensions(index, clusters.length, options);
     drawMapAtSquare(context, square, cluster, segments, options);
   });
@@ -89,11 +101,11 @@ function computeSquareDimensions(index, count, options) {
   };
 }
 
-function drawMapAtSquare(context, square, controlPoints, segments, options) {
+function drawMapAtSquare(context, square, cluster, segments, options) {
 
   const moves = _.filter(segments, ['type', 'move']);
 
-  const projection = createProjection(context, controlPoints, square.size, square.size);
+  const projection = createProjection(context, cluster.controlPoints, square.size, square.size);
   const geopath = context.d3.geoPath()
     .projection(projection);
 
@@ -112,8 +124,6 @@ function drawMapAtSquare(context, square, controlPoints, segments, options) {
     .attr('width', square.size)
     .attr('fill', backgroundColor);
 
-  const label = lookupLabel(controlPoints);
-
   const pointToCoord = point => [point.lon, point.lat];
   _.each(moves, move => {
 
@@ -130,7 +140,7 @@ function drawMapAtSquare(context, square, controlPoints, segments, options) {
       .attr('d', geopath);
   });
 
-  const fontSize = square.size * 0.05;
+  const fontSize = Math.min(square.size * 0.05, 16);
   context.svg.append('text')
     .attr('text-anchor', 'start')
     .attr('font-family', 'sans-serif')
@@ -139,7 +149,7 @@ function drawMapAtSquare(context, square, controlPoints, segments, options) {
     .attr('font-size', fontSize)
     .attr('x', square.x + fontSize * 0.5)
     .attr('y', square.y + square.size - fontSize * 0.5)
-    .text(label);
+    .text(cluster.label);
 
 }
 
